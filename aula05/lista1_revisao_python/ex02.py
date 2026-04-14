@@ -1,0 +1,26 @@
+print ('Digite dois valores inteiros separados por um operador +,-,* ou /')
+x = input()
+if '+' in x:
+    numeros = x.split('+')
+    n1 = int(numeros[0])
+    n2 = int(numeros[1])
+    print(f'O resultado da operação é {n1+n2}')
+    #print('soma')
+if '-' in x:
+    numeros = x.split('-')
+    n1 = int(numeros[0])
+    n2 = int(numeros[1])
+    print(f'O resultado da operação é {n1-n2}')
+    #print('subtração')
+if '*' in x:
+    numeros = x.split('*')
+    n1 = int(numeros[0])
+    n2 = int(numeros[1])
+    print(f'O resultado da operação é {n1*n2}')
+    #print('multiplicação')
+if '/' in x:
+    numeros = x.split('/')
+    n1 = int(numeros[0])
+    n2 = int(numeros[1])
+    print(f'O resultado da operação é {n1/n2}')
+    #print('divisão')
