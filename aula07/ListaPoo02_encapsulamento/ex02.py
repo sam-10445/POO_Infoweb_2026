@@ -99,6 +99,45 @@ class Conta:
 
     def set_saque(self, v):
         self.saldo -= v
+
+class Cinema:
+    #criar variaveis e encapsular
+    def __init__(self):
+        self.__d = ''
+        self.__h = 0
+        self.base = 0
+        self.ingresso = 0
+    #definir e testar os valores
+    def set_dia(self, v):
+        if v in ['segunda','terça','quarta','quinta','sexta','sábado','domingo']:
+            self.__d = v
+        else: raise ValueError('dia da semana invalido')
+    def set_hora(self, v):
+        if v <= 23: self.__h = v
+        else: raise ValueError()
+    #recuperar os atributos
+    def get_dia(self):
+        return self.__d
+    def get_horas(self):
+        return self.__h
+    
+    #operações pra calcular o ingresso
+    def calc_ingresso(self):
+        # Quarta-feira (regra especial)
+        if self.__d == 'quarta':
+            return 8
+
+        # Definir valor base
+        if self.__d in ['segunda','terça','quinta']:
+            base = 16
+        else:  # sexta, sábado, domingo
+            base = 20
+
+        # Acréscimo de horário
+        if self.__h >= 17:
+            return base * 1.5
+        else:
+            return base
     
 # INTERFACE COM O USUÁRIO
 class UI:
@@ -115,7 +154,7 @@ class UI:
 
     @staticmethod
     def menu():
-        print('-'*60)
+        print('-'*50)
         print("""
 MENU 
 [1] Calcular área do Triângulo
@@ -203,4 +242,11 @@ MENU
         print('-'*45)
         print('COMPRA DE INGRESSOS PARA O CINEMA')
         print('-'*45)
+        x = Cinema()
+        x.set_dia(input('Dia da semana da sessão: ').lower())
+        x.set_hora(int(input('Horário (não coloque h): ')))
+        print('-'*50)
+        print(f'Dia da Sessão: {x.get_dia()}')
+        print(f'Horário: {x.get_horas()}')
+        print(f'Valor do ingresso: R${x.calc_ingresso():.0f},00')
 UI.main()
