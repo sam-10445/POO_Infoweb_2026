@@ -60,11 +60,11 @@ class Viagem:
 class Conta:
     def __init__(self):
          self.__nome = ''
-         self.__numero = 0
-         self.saldo = 0 #começa com 0? Modificado por depósitos e saques (não precisa ser testado)
+         self.__numero = ''
+         self.saldo = 0.00 #começa com 0? Modificado por depósitos e saques (não precisa ser testado)
          #depósito e saque:
-         self.__deposito = 0
-         self.__saque = 0
+         self.__deposito = 0.00
+         self.__saque = 0.00
 
     #teste de validada
     def set_nome(self, v):
@@ -92,6 +92,8 @@ class Conta:
         return self.__deposito
     def get_saque(self):
         return self.__saque
+    def get_saldo(self):
+        return self.saldo
     
     #deposito e saque
     def set_deposito(self, v):
@@ -104,9 +106,7 @@ class Cinema:
     #criar variaveis e encapsular
     def __init__(self):
         self.__d = ''
-        self.__h = 0
-        self.base = 0
-        self.ingresso = 0
+        self.__h = 0.0
     #definir e testar os valores
     def set_dia(self, v):
         if v in ['segunda','terça','quarta','quinta','sexta','sábado','domingo']:
@@ -213,7 +213,7 @@ MENU
         print('*Dados atualizados!*')
         print(f'Nome: {x.get_nome()}')
         print(f'Número da Conta: {x.get_numero()}')
-        print(f'Saldo da conta: R${x.saldo}')
+        print(f'Saldo da conta: R${x.get_saldo():.2f}')
         acao = 4
         while acao != 0:
             print('''
@@ -227,13 +227,13 @@ MENU
                 print('\n' * 50)
                 x.set_deposito(int(input('Valor: R$')))
                 print('\n' * 50)
-                print(f'Saldo da conta: R${x.saldo}')
+                print(f'Saldo da conta: R${x.get_saldo():.2f}')
             elif acao == 2:
                 print('\n' * 50)
-                if x.saldo > 0:
+                if x.get_saldo() > 0:
                     x.set_saque(int(input('Valor: R$')))
                     print('\n' * 50)
-                print(f'Saldo da conta: R${x.saldo}')
+                print(f'Saldo da conta: R${x.get_saldo():.2f}')
         print('*ENCERRANDO...*')
 
 
