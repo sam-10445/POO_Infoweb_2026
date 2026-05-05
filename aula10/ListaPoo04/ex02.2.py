@@ -29,7 +29,7 @@ class Contato:
 
 
 class ContatoUI:
-    contatos = []
+    contatos = [] #lista de contatos (cada elemento é um objeto com os atributos)
 
     @staticmethod
     def main():
@@ -77,52 +77,49 @@ class ContatoUI:
                 print(x)
 
     @classmethod #quando você precisa acessar uma variavel solta (contatos)
-    def atualizar(cls):
-        if len(cls.contatos) == 0:
-            print('Lista vazia')
-            return
-
-        y = int(input('Informe o ID do contato: '))
-        for i in range(len(cls.contatos)):
-            if cls.contatos[i].get_id() == y:
-                print('Encontrado!')
-                cls.contatos[i].set_nome(input('Novo nome: '))
-                cls.contatos[i].set_email(input('Novo e-mail: '))
-                cls.contatos[i].set_fone(input('Novo telefone: '))
-                return
-
-        print('Não encontrado')
-
-    @classmethod #quando você precisa acessar uma variavel solta (contatos)
-    def excluir(cls):
-        if len(cls.contatos) == 0:
-            print('Lista vazia')
-            return
-
-        y = int(input('Informe o ID do contato para excluir: '))
-        for i in range(len(cls.contatos)):
-            if cls.contatos[i].get_id() == y:
-                cls.contatos.pop(i)
-                print('Contato removido!')
-                return
-
-        print('Não encontrado')
-
-    @classmethod #quando você precisa acessar uma variavel solta (contatos)
-    def pesquisar(cls):
-        if len(cls.contatos) == 0:
-            print('Lista vazia')
-            return
-
-        inicio = input('Digite o início do nome: ').lower()
-        encontrou = False
-
+    def listar_id(cls, id):
+        # encontrar o contato com o id informado
         for x in cls.contatos:
-            if x.get_nome().lower().startswith(inicio):
-                print(x)
-                encontrou = True
+            if x.get_id() == id: return x
+        # se não encontrar, retorna None
+        return None
+    
+    @classmethod
+    def atualizar(cls):
+        ContatoUI.listar()
+        id = int(input('Informe o id do contato a ser atualizado: '))
+        x = ContatoUI.listar_id(id)
+        if x != None:
+            # remove da lista o contatos
+            cls.contatos.remove(x)
 
-        if not encontrou:
-            print('Nenhum contato encontrado')
+            nome = input('Informe novo nome: ')
+            email = input('Informe novo e-mail: ')
+            fone = input('Informe novo telefone: ')
+
+            # Criar um novo objeto
+            x = Contato(id, nome, email, fone)
+            # 
+            cls.contatos.append(x)
+        else:
+            print('Esse contato não existe...')
+
+    @classmethod
+    def excluir(cls):
+        ContatoUI.listar()
+        id = int(input('Informe o id do contato a ser atualizado: '))
+        x = ContatoUI.listar_id(id)
+        if x != None:
+            # remove da lista o contatos
+            cls.contatos.remove(x)
+        else:
+            print('Esse contato não existe...')
+
+    @classmethod
+    def pesquisar(cls):
+        iniciais = input('Informe as inicias do nome: ')
+        for x in cls.contatos:
+            if x.get_nome().startwith(iniciais): print(x)
+
 
 ContatoUI.main()
