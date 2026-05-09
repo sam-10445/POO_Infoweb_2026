@@ -11,15 +11,15 @@ class Playlist:
 
     #sets
     def set_id(self, id):
-        if id <= 0: raise ValueError("O ID deve ser maior que zero.")
+        if id < 0: raise ValueError()
         self.__id = id
 
     def set_nome(self, nome):
-        if nome == "": raise ValueError("O nome não pode ser vazio.")
+        if nome == "": raise ValueError()
         self.__nome = nome
 
     def set_descricao(self, descricao):
-        if descricao == "": raise ValueError("A descrição não pode ser vazia.")
+        if descricao == "": raise ValueError()
         self.__descricao = descricao
 
     #ToString
@@ -41,21 +41,21 @@ class Musica:
 
     #sets
     def set_id(self, id):
-        if id <= 0: raise ValueError("O ID deve ser maior que zero.")
+        if id < 0: raise ValueError()
         self.__id = id
 
     def set_titulo(self, titulo):
-        if titulo == "": raise ValueError("O título não pode ser vazio.")
+        if titulo == "": raise ValueError()
         self.__titulo = titulo
 
     def set_artista(self, artista):
         if artista == "":
-            raise ValueError("O artista não pode ser vazio.")
+            raise ValueError()
 
         self.__artista = artista
 
     def set_album(self, album):
-        if album == "": raise ValueError("O álbum não pode ser vazio.")
+        if album == "": raise ValueError()
         self.__album = album
 
     #ToString
@@ -77,19 +77,19 @@ class PlaylistItem:
 
     #sets
     def set_id(self, id):
-        if id <= 0: raise ValueError("O ID deve ser maior que zero.")
+        if id < 0: raise ValueError()
         self.__id = id
 
     def set_id_playlist(self, id_playlist):
-        if id_playlist <= 0: raise ValueError("O ID da playlist deve ser maior que zero.")
+        if id_playlist < 0: raise ValueError()
         self.__id_playlist = id_playlist
 
     def set_id_musica(self, id_musica):
-        if id_musica <= 0: raise ValueError("O ID da música deve ser maior que zero.")
+        if id_musica < 0: raise ValueError()
         self.__id_musica = id_musica
 
     def set_sequencia(self, sequencia):
-        if sequencia <= 0: raise ValueError("A sequência deve ser maior que zero.")
+        if sequencia < 0: raise ValueError()
         self.__sequencia = sequencia
 
     #ToString
