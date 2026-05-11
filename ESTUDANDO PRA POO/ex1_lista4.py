@@ -25,7 +25,7 @@ class Time:
     
 class Jogador:
     #init
-    def __init___(self, id, idTime, nome, camisa):
+    def __init__(self, id, idTime, nome, camisa):
         self.set_id(id)
         self.set_idTime(idTime)
         self.set_nome(nome)
@@ -41,7 +41,7 @@ class Jogador:
         if nome == '': raise ValueError()
         self.__nome = nome
     def set_camisa(self, camisa):
-        if 99 < camisa < 0: raise ValueError()
+        if camisa < 0: raise ValueError()
         self.__camisa = camisa
     #get
     def get_id(self): return self.__id
@@ -162,8 +162,7 @@ class UI:
         for y in cls.jogadores:
             if y.get_id() == id:
                 novo_nome = input('Novo Nome: ')
-                nova_camisa = input('Nova Camisa: ')
-
+                nova_camisa = int(input('Nova Camisa: '))
 
                 y.set_nome(novo_nome)
                 y.set_camisa(nova_camisa)
@@ -182,12 +181,20 @@ class UI:
     def listar_jogadores_time(cls):
         id = int(input('ID do Time: '))
 
-        for x in cls.times:
-            if x.get_id() == id:
-                novo_nome = input('Novo Nome: ')
-                novo_estado = input('Novo Estado: ')
+        for y in cls.jogadores:
+            if y.get_idTime() == id:
+                print(y)
 
-                x.set_nome(novo_nome)
-                x.set_estado(novo_estado)
-                print('Atualizado!')
+    @classmethod
+    def transferir(cls):
+        id = int(input("ID do Jogador: "))
+        idTime = int(input("ID do Time: "))
+
+        for y in cls.jogadores:
+            if y.get_id() == id:
+                y.set_idTime(idTime)
+                print("Transferido!")
+            else:
+                print("Jogador não encontrado. ")
+        
 UI.main()
