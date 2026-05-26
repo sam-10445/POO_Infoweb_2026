@@ -65,6 +65,7 @@ class PacienteUI:
             if op == 2: PacienteUI.listar()
             if op == 3: PacienteUI.excluir()
             if op == 4: PacienteUI.atualizar()
+            if op == 5: Paciente.pesquisar()
             if op == 6: PacienteUI.anive()
         print('Programa encerrado...')
 
@@ -103,27 +104,35 @@ class PacienteUI:
     def atualizar(cls):
         id = int(input('ID do paciente: '))
         for x in cls.__pacientes:
-            if x.get_id == id:
-                nome = input('Nome:')
-                cpf = input('CPF: ')
-                fone = input('Telefone: ')
+            if x.get_id() == id:
+                nome = input('Novo Nome:')
+                cpf = input('Novo CPF: ')
+                fone = input('Novo Telefone: ')
                 # pedi data
-                data = datetime.strptime(input('Data de Nascimento (dd/mm/aaaa): '), "%d/%m/%Y")
+                data = datetime.strptime(input('Nova Data de Nascimento (dd/mm/aaaa): '), "%d/%m/%Y")
             
             x.set_nome(nome)
             x.set_cpf(cpf)
             x.set_fone(fone)
             x.set_data(data)
 
-    
-
     @classmethod
     def excluir(cls):
+        id = int(input('ID do paciente: '))
+        for x in cls.__pacientes:
+            if x.get_id() == id:
+                cls.__pacientes.remove(x)
 
     @classmethod
     def pesquisar(cls):
+        s = input('As iniciais do paciente: ')
+        for x in cls.__pacientes:
+            if x.get_nome().startwith(s): print(x)
 
     @classmethod
     def anive(cls):
-    
+        m = int(input('O mês para listar os aniversariantes: '))
+        for x in cls.__pacientes:
+            if x.get_data().month == m: print(x)
+
 PacienteUI.main()
