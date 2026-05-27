@@ -25,12 +25,13 @@ class Treino:
     def get_distancia(self): return self.__distancia
     def get_tempo(self): return self.__tempo
 
+    def Pace(self):
+        pace = self.__tempo.total_segunds() / self.__distancia
+        return pace
+
     #ToString
     def __str__(self):
-        return f"ID: {self.__id} | Data: {self.__data.strftime("%d/%m/%Y")} | Distância: {self.__distancia} m | Tempo: {self.__tempo} h"
-    
-    def Pace(self, distancia, tempo):
-        pass
+        return f"ID: {self.__id} | Data: {self.__data.strftime("%d/%m/%Y")} | Distância: {self.__distancia} km | Tempo: {self.__tempo} min | Pace: {self.Pace()} min/km"
 
 class TreinoUI:
     #listas
@@ -41,6 +42,7 @@ class TreinoUI:
     def main():
         op = -1
         while op != 0:
+            op = TreinoUI.menu()
             if op == 1: TreinoUI.inserir()
             if op == 2: TreinoUI.listar()
             if op == 3: TreinoUI.listar_id()
@@ -65,7 +67,7 @@ class TreinoUI:
     def inserir(cls):
         id = int(input('ID: '))
         data = datetime.strptime(input('Data (dd/mm/aaaa): '), "%d/%m/%Y")
-        distancia = float(input('Distância (m): '))
+        distancia = float(input('Distância (km): '))
         tempo = timedelta(minutes=int(input("Minutos: ")))
 
         x = Treino(id, data, distancia, tempo)
@@ -106,7 +108,12 @@ class TreinoUI:
 
     @classmethod
     def mais_rapido(cls):
-        pass
-
+        paces = []
+        if len(cls.treinos) == 0:
+            print('Não há treinos registrados...')
+        else:
+            for x in cls.treinos:
+                paces += x.Pace()
+                min(paces)
 
 TreinoUI.main()
