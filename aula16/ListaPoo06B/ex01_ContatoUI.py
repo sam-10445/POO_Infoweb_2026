@@ -12,18 +12,21 @@ class Contato:
     def set_id(self, id):
         if id < 0: raise ValueError("Id deve ser positivo")
         self.__id = id
+
     def set_nome(self, nome):
         if nome == "": raise ValueError("Nome deve ser informado")
         self.__nome = nome
+
     def set_email(self, email):
         if email == "": raise ValueError("E-mail deve ser informado")
         self.__email = email
+
     def set_fone(self, fone):
         if fone == "": raise ValueError("Fone deve ser informado")
         self.__fone = fone
+
     def set_nasc(self, nasc):
-        if nasc > datetime.now():
-            raise ValueError()
+        if nasc > datetime.now(): raise ValueError()
         self.__nasc = nasc
 
     def get_id(self): return self.__id
@@ -36,15 +39,26 @@ class Contato:
         return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__nasc.strftime('%d/%m/%Y')}"
 
     def to_json(self):
-        return { "id":self.__id, "nome":self.__nome, "email":self.__email, "fone":self.__fone, "nasc":self.__nasc.strftime('%d/%m/%Y')}
+        return {
+            "id": self.__id,
+            "nome": self.__nome,
+            "email": self.__email,
+            "fone": self.__fone,
+            "nasc": self.__nasc.strftime('%d/%m/%Y')
+        }
 
     @staticmethod
     def from_json(dic):
-        return Contato(dic["id"], dic["nome"], dic["email"], dic["fone"], dic["nasc"])
-   
+        # Converter a data que eu digito que está em string (dd/mm/aaaa) em datetime
+        # porque o arquivo contatos.json trata a data como datetime, ent vai dá erro se não fizer
+        nasc = datetime.strptime(dic["nasc"], "%d/%m/%Y")
+        return Contato(dic["id"], dic["nome"], dic["email"], dic["fone"], nasc)
+
+
 class ContatoUI:
-    __contatos = []  # lista de objetos (clientes)  
-    @staticmethod    
+    __contatos = []
+
+    @staticmethod
     def main():
         ContatoUI.abrir()
         op = 0
@@ -60,67 +74,97 @@ class ContatoUI:
 
     @staticmethod
     def menu():
-        print("1-Inserir, 2-Listar, 3-Atualizar, 4-Excluir, 9-Fim")
+        print("1-Inserir, 2-Listar, 3-Listar com id, 4-Atualizar, 5-Excluir")
+        print("6-Pesquisar, 7-Ver aniversáriante(s) - 9-SAIR")
         return int(input("Escolha uma opção: "))
-   
+
     @classmethod
-    def salvar(cls):    
-        arquivo = open("clientes.json", mode = "w")
-        json.dump(cls.__objetos, arquivo, default = Contato.to_json, indent = 2)
+    def salvar(cls):
+        arquivo = open("contatos.json", mode="w")
+        json.dump(cls.__contatos, arquivo, default=Contato.to_json, indent=2)
         arquivo.close()
-        print("O arquivo clientes.json foi salvo")
+        print("O arquivo contatos.json foi salvo")
 
     @classmethod
     def abrir(cls):
-        try:        
-            arquivo = open("clientes.json", mode = "r")
+        try:
+            arquivo = open("contatos.json", mode="r")
             list_dic = json.load(arquivo)
             arquivo.close()
-            cls.__objetos = []
+            cls.__contatos = []
             for dic in list_dic:
                 x = Contato.from_json(dic)
-                cls.__objetos.append(x)
-            print("O arquivo clientes.json foi aberto")
-        except FileNotFoundError: # Acontece qdo o arquivo não existe
-            pass                  # não faz nada
+                cls.__contatos.append(x)
+            print("O arquivo contatos.json foi aberto")
+        except FileNotFoundError:
+            pass
 
-    @classmethod      # quando acessa o atributo - usa o cls
+    @classmethod
     def inserir(cls):
         id = int(input("Informe o id: "))
         nome = input("Informe o nome: ")
         email = input("Informe o e-mail: ")
         fone = input("Informe o telefone: ")
-        x = Contato(id, nome, email, fone)
-        cls.__objetos.append(x)
+        nasc = datetime.strptime(input('Data de nascimento: '), "%d/%m/%Y")
+        x = Contato(id, nome, email, fone, nasc)
+        cls.__contatos.append(x)
         ContatoUI.salvar()
 
     @classmethod
     def listar(cls):
-        if len(cls.__objetos) == 0: print("Nenhum cliente cadastrado")
+        if len(cls.__contatos) == 0:
+            print("Nenhum contato cadastrado")
         else:
-            for x in cls.__objetos: print(x)
+            for x in cls.__contatos:
+                print(x)
+
+    @classmethod
+    def listar_id(cls):
+        id = int(input('ID do contado do Contato: '))
+        for x in cls.__contatos:
+            if x.get_id() == id:
+                print(x)
 
     @classmethod
     def atualizar(cls):
-        for x in cls.__objetos: print(x)
+        for x in cls.__contatos:
+            print(x)
         id = int(input("Informe o id do cliente a ser atualizado: "))
-        for x in cls.__objetos:
+        for x in cls.__contatos:
             if x.get_id() == id:
                 nome = input("Informe o novo nome: ")
                 email = input("Informe o novo e-mail: ")
                 fone = input("Informe o novo telefone: ")
+                nasc = datetime.strptime(input('Informe a nova data de nascimento: '), "%d/%m/%Y")
                 x.set_nome(nome)
                 x.set_email(email)
                 x.set_fone(fone)
+                x.set_nasc(nasc)
                 ContatoUI.salvar()
 
     @classmethod
     def excluir(cls):
-        for x in cls.__objetos: print(x)
+        for x in cls.__contatos:
+            print(x)
         id = int(input("Informe o id do cliente a ser excluído: "))
-        for x in cls.__objetos:
+        for x in cls.__contatos:
             if x.get_id() == id:
-                cls.__objetos.remove(x)
+                cls.__contatos.remove(x)
                 ContatoUI.salvar()
+
+    @classmethod
+    def pesquisar(cls):
+        s = input('As iniciais do paciente: ')
+        for x in cls.__contatos:
+            if x.get_nome().startswith(s):
+                print(x)
+
+    @classmethod
+    def aniver(cls):
+        m = int(input('O mês para listar os aniversariantes: '))
+        for x in cls.__contatos:
+            if x.get_nasc().month == m:
+                print(x)
+
 
 ContatoUI.main()

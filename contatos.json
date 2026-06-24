@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nome": "Julia",
+    "email": "julia@gmail.com",
+    "fone": "12345",
+    "nasc": "20/06/2009"
+  },
+  {
+    "id": 2,
+    "nome": "Juan",
+    "email": "juan@gmail.com",
+    "fone": "12345",
+    "nasc": "24/06/2009"
+  },
+  {
+    "id": 3,
+    "nome": "Samuel",
+    "email": "samuel@gmail.com",
+    "fone": "12345",
+    "nasc": "14/03/2020"
+  },
+  {
+    "id": 4,
+    "nome": "Samara",
+    "email": "samara@gmail.com",
+    "fone": "12345",
+    "nasc": "08/03/2010"
+  }
+]
