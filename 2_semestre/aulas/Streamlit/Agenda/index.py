@@ -1,3 +1,5 @@
+# index.py é o arquivo executável (dentro da pasta, no terminal: streamlit run index.py)
+
 import streamlit as st
 from retanguloUI import RetanguloUI
 

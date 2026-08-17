@@ -1,3 +1,7 @@
+## Lista Poo 08 - Streamlit (GSA: 11 de ago. - Docs)
+
+# index.py é o arquivo executável (dentro da pasta, no terminal: streamlit run index.py)
+
 import streamlit as st
 from pacienteUI import PacienteUI
 
