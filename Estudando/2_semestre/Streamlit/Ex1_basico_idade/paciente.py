@@ -18,6 +18,7 @@ class Paciente:
         self.__fone = fone
     def set_nasc(self, nasc):
         if nasc > datetime.now(): raise ValueError('Data de nascimento no futuro.')
+        self.__nasc = nasc
 
     def get_nome(self): return self.__nome
     def get_cpf(self): return self.__cpf
@@ -25,7 +26,7 @@ class Paciente:
     def get_nasc(self): return self.__nasc
 
     def idade(self):
-        x = datetime.now() - self.get_nasc # pega a idade
+        x = datetime.now() - self.get_nasc() # pega a idade
         dias = x.days #todos os dias que essa pessoa já viveu
         anos = dias // 365 #quantos anos inteiros eles dão
         meses = dias % 365 // 30 #quantos meses inteiros eles dão
