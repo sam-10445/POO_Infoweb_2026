@@ -1,25 +1,33 @@
-#INTERFACE COM O USUÁRIO
-
 import streamlit as st
-from datetime import datetime
-
-from cliente import Cliente #chamar a classe
+import service
 
 class ClienteUI:
+
+    @staticmethod
     def main():
         st.header('Cadastro de Clientes')
 
-        st.write('''
-[1] - Inserir 
-[2] - Listar 
-[3] - Atualizar
-[4] - Excluir
-[0] - SAIR
-''')
-        op = st.text_input('Opção: ')
+        if 'opcao' not in st.session_state:
+            st.session_state.opcao = None
 
-        if st.button('OK'):
-            if op == 1: 
-            if op == 2:
-            if op == 3:
-            if op == 4: 
+        st.write('[1] - Inserir')
+        st.write('[2] - Listar')
+        st.write('[3] - Atualizar')
+        st.write('[4] - Excluir')
+        st.write('[0] - SAIR')
+
+        resp = st.text_input('Opção:', key='opcao_menu')
+
+        if st.button('OK', key='ok'):
+
+            if resp in ['0', '1', '2', '3', '4']:
+                st.session_state.opcao = resp
+                st.rerun()
+            else:
+                st.warning('Opção inválida.')
+
+        if st.session_state.opcao == '1':service.inserir()
+        elif st.session_state.opcao == '2':service.listar()
+        elif st.session_state.opcao == '3':service.atualizar()
+        elif st.session_state.opcao == '4':service.excluir()
+        elif st.session_state.opcao == '0':st.write('Saindo...')
