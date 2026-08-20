@@ -1,4 +1,4 @@
-# OPERAÇÕES
+# OPERAÇÕES ('Tudo no ChatGPT :(')
 
 import streamlit as st
 from cliente import Cliente

@@ -1,3 +1,5 @@
+# CRIAÇÃO DA CLASSE NORMALMENTE 
+
 class Cliente:
 
     def __init__(self, id, nome, email, fone):
