@@ -2,33 +2,33 @@
 
 ## CLASSE
 
-[ ] Criei a classe?
+[ ] Criei a classe? SIM
 
-[ ] Coloquei todos os atributos do enunciado?
+[ ] Coloquei todos os atributos do enunciado? SIM
 
-[ ] Fiz o `__init__`?
+[ ] Fiz o `__init__`? SIM
 
-[ ] Usei os `set_` no construtor?
+[ ] Usei os `set_` no construtor? SIM
 
-[ ] Criei todos os getters?
+[ ] Criei todos os getters? SIM
 
-[ ] Criei todos os setters?
+[ ] Criei todos os setters? SIM
 
-[ ] Criei `__str__`?
+[ ] Criei `__str__`? SIM
 
-[ ] Criei `to_json()`?
+[ ] Criei `to_json()`? SIM
 
-[ ] Criei `from_json()`?
+[ ] Criei `from_json()`? SIM
 
 ---
 
 ## DAO
 
-[ ] Importe a classe corretamente?
+[ ] Importe a classe corretamente? SIM
 
-[ ] Criei o DAO?
+[ ] Criei o DAO? SIM
 
-[ ] Defini o arquivo JSON correto?
+[ ] Defini o arquivo JSON correto? SIM
 
 [ ] Criei `__objetos`?
 
