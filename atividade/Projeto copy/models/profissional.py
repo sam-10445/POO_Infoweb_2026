@@ -14,9 +14,9 @@ class Profissional:
     def __init__(self, id, nome, email, especialidade):
 
         self.set_id(id)
-        self.set_atributo1(nome)
-        self.set_atributo2(email)
-        self.set_atributo3(especialidade)
+        self.set_nome(nome)
+        self.set_email(email)
+        self.set_especialidade(especialidade)
 
     # SETTERS
 
@@ -35,9 +35,9 @@ class Profissional:
             raise ValueError("email deve ser informado")
         self.__email = email
 
-    def set_atributo3(self, especialidade):
+    def set_especialidade(self, especialidade):
         if especialidade == "":
-            raise ValueError("Atributo deve ser informado")
+            raise ValueError("Especialidade deve ser informado")
         self.__especialidade = especialidade
 
     # GETTERS
@@ -70,9 +70,9 @@ class Profissional:
 
         return {
             "id": self.__id,
-            "atributo1": self.__nome,
-            "atributo2": self.__email,
-            "atributo3": self.__especialidade
+            "nome": self.__nome,
+            "email": self.__email,
+            "especialidade": self.__especialidade
         }
 
     # DICIONÁRIO → OBJETO
