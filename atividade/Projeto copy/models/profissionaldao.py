@@ -1,14 +1,14 @@
 # DAO COMPLETO
 
-from models.nomedaclasse import NomeDaClasse
+from models.profissional import Profissional
 import json
 
 
-class NomeDaClasseDAO:
+class ProfissionalDAO:
 
     def __init__(self):
 
-        self.__arquivo = "nomedaclasse.json"
+        self.__arquivo = "profissional.json"
         self.__objetos = []
 
         self.__abrir()
@@ -94,7 +94,7 @@ class NomeDaClasseDAO:
 
             for dic in list_dic:
 
-                obj = NomeDaClasse.from_json(dic)
+                obj = Profissional.from_json(dic)
 
                 self.__objetos.append(obj)
 
@@ -114,7 +114,7 @@ class NomeDaClasseDAO:
         json.dump(
             self.__objetos,
             arquivo,
-            default=NomeDaClasse.to_json,
+            default=Profissional.to_json,
             indent=2
         )
 
