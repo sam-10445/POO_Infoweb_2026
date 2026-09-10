@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nome": "Sa\u00fade",
+    "diretor": "Alice",
+    "fone": "12345678"
+  },
+  {
+    "id": 2,
+    "nome": "Odontologia",
+    "diretor": "Pedro Calvacante",
+    "fone": "12345678"
+  },
+  {
+    "id": 3,
+    "nome": "Neorologia",
+    "diretor": "Gabriel De Souza",
+    "fone": "12345678"
+  }
+]
