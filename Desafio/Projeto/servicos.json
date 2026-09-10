@@ -13,5 +13,10 @@
     "id": 3,
     "descricao": "Alergista",
     "valor": 300.0
+  },
+  {
+    "id": 4,
+    "descricao": "Neorologista",
+    "valor": 800.0
   }
 ]
