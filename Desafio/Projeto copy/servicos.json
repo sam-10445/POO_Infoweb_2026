@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "descricao": "Dentista",
+    "valor": 400.0
+  },
+  {
+    "id": 2,
+    "descricao": "Consulta",
+    "valor": 200.0
+  },
+  {
+    "id": 3,
+    "descricao": "Alergista",
+    "valor": 300.0
+  },
+  {
+    "id": 4,
+    "descricao": "Neorologista",
+    "valor": 800.0
+  }
+]

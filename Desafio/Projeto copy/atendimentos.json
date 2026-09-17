@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "data": "09/09/2026 22:36",
+    "queixa_principal": "Prova de POO",
+    "historico_saude": "Ruim",
+    "avaliacao": "0/10",
+    "prescricao": "F\u00e9rias",
+    "id_horario": 1
+  }
+]

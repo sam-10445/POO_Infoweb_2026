@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "nome": "Dr. Samara Cristina Miranda",
+    "email": "samaranovaes@gmail.com",
+    "especialidade": "Pediatria"
+  },
+  {
+    "id": 2,
+    "nome": "Dr. Jos\u00e9 Ludcledson",
+    "email": "ludcledson@gmail.com",
+    "especialidade": "Cardiologista"
+  }
+]
