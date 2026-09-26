@@ -26,5 +26,12 @@
     "email": "gilbert@email.com",
     "fone": "84999998877",
     "senha": "1234"
+  },
+  {
+    "id": 5,
+    "nome": "Samara Cristina",
+    "email": "samara@gmail.com",
+    "fone": "12345678",
+    "senha": "@123"
   }
 ]
