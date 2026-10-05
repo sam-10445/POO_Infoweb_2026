@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "nome": "Eduardo",
+    "email": "edu@email.com",
+    "especialidade": "Cardiologista",
+    "senha": "1234"
+  },
+  {
+    "id": 2,
+    "nome": "Jos\u00e9",
+    "email": "jose@email.com",
+    "especialidade": "Infectologista",
+    "senha": "1234"
+  }
+]
