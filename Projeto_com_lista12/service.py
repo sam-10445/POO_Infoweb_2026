@@ -7,6 +7,7 @@ from models.horariodao import HorarioDAO
 from models.profissional import Profissional
 from models.profissionaldao import ProfissionalDAO
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 class Service:
     @staticmethod
@@ -111,7 +112,13 @@ class Service:
     @staticmethod
     def horario_listar_disponiveis(id_profissional):
         r = []
-        agora = datetime.now()
+
+        # Pega o horário atual considerando o fuso horário do Brasil.
+        # O replace(tzinfo=None) mantém o mesmo formato de data
+        # usado pelos objetos Horario do projeto.
+        agora = datetime.now(
+            ZoneInfo("America/Sao_Paulo")
+        ).replace(tzinfo=None)
 
         for h in Service.horario_listar():
             if h.get_data() >= agora and h.get_confirmado() == False \
