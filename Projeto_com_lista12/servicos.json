@@ -8,5 +8,30 @@
     "id": 2,
     "descricao": "Exame de Sangue",
     "valor": 200.0
+  },
+  {
+    "id": 3,
+    "descricao": "Dentista",
+    "valor": 300.0
+  },
+  {
+    "id": 4,
+    "descricao": "Oftamologista",
+    "valor": 400.0
+  },
+  {
+    "id": 5,
+    "descricao": "Pediatria",
+    "valor": 500.0
+  },
+  {
+    "id": 6,
+    "descricao": "Cardiologista",
+    "valor": 600.0
+  },
+  {
+    "id": 7,
+    "descricao": "Nutricionista",
+    "valor": 600.0
   }
 ]
