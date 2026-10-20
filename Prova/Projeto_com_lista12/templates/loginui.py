@@ -1,5 +1,5 @@
 import streamlit as st
-from service import Service
+from Prova.Projeto_com_lista12.service import Service
 
 class LoginUI:
     def main():

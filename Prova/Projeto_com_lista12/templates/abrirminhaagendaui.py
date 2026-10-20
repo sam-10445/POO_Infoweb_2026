@@ -1,7 +1,7 @@
 import streamlit as st
 import time
 from datetime import datetime, timedelta
-from service import Service
+from Prova.Projeto_com_lista12.service import Service
 
 class AbrirMinhaAgendaUI:
     def main():

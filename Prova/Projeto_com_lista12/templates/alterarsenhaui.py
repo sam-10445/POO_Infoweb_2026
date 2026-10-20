@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-from service import Service
+from Prova.Projeto_com_lista12.service import Service
 
 class AlterarSenhaUI:
     def main():

@@ -1,9 +1,9 @@
-from models.servico import Servico
+from Prova.Projeto_com_lista12.models.cliente import Cliente
 import json
 
-class ServicoDAO:
+class ClienteDAO:
     def __init__(self):
-        self.__arquivo = "servicos.json"
+        self.__arquivo = "clientes.json"
         self.__objetos = []
         self.__abrir()
 
@@ -45,12 +45,12 @@ class ServicoDAO:
             arquivo.close()
             self.__objetos = []
             for dic in list_dic:
-                obj = Servico.from_json(dic)
+                obj = Cliente.from_json(dic)
                 self.__objetos.append(obj)
         except FileNotFoundError:
             pass
 
     def __salvar(self):    
         arquivo = open(self.__arquivo, mode = "w")
-        json.dump(self.__objetos, arquivo, default = Servico.to_json, indent = 2)
+        json.dump(self.__objetos, arquivo, default = Cliente.to_json, indent = 2)
         arquivo.close()

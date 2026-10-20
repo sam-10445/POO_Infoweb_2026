@@ -1,33 +1,33 @@
 import streamlit as st
 import pandas as pd
-from service import Service
+from Prova.Projeto_com_lista12.service import Service
 
-class MeusServicosUI:
+class MinhaAgendaUI:
     def main():
-        st.header("Meus Serviços")
+        st.header("Minha Agenda")
 
-        # Busca somente os horários pertencentes ao cliente logado.
-        horarios = Service.horario_listar_cliente(
+        # Busca somente os horários do profissional que está logado.
+        horarios = Service.horario_listar_profissional(
             st.session_state["usuario_id"]
         )
 
         if len(horarios) == 0:
-            st.write("Nenhum serviço agendado")
+            st.write("Nenhum horário cadastrado")
 
         else:
             dic = []
 
             for obj in horarios:
-                profissional = Service.profissional_listar_id(
-                    obj.get_id_profissional()
+                cliente = Service.cliente_listar_id(
+                    obj.get_id_cliente()
                 )
 
                 servico = Service.servico_listar_id(
                     obj.get_id_servico()
                 )
 
-                if profissional != None:
-                    profissional = profissional.get_nome()
+                if cliente != None:
+                    cliente = cliente.get_nome()
 
                 if servico != None:
                     servico = servico.get_descricao()
@@ -36,8 +36,8 @@ class MeusServicosUI:
                     "id": obj.get_id(),
                     "data": obj.get_data(),
                     "confirmado": obj.get_confirmado(),
-                    "serviço": servico,
-                    "profissional": profissional
+                    "cliente": cliente,
+                    "serviço": servico
                 })
 
             df = pd.DataFrame(dic)
