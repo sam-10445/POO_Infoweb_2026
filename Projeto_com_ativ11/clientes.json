@@ -1,0 +1,58 @@
+[
+  {
+    "id": 6,
+    "nome": "Talia Apaza",
+    "email": "talia@gmail.com",
+    "fone": "12345678",
+    "senha": "1234"
+  },
+  {
+    "id": 7,
+    "nome": "Julia Antonelly",
+    "email": "julia@gmail.com",
+    "fone": "12345678",
+    "senha": "1234"
+  },
+  {
+    "id": 8,
+    "nome": "Yasmim Emanuelly",
+    "email": "yasmim@gmail.com",
+    "fone": "12345678",
+    "senha": "1234"
+  },
+  {
+    "id": 9,
+    "nome": "Elverty Justino",
+    "email": "elverty@gmail.com",
+    "fone": "12345678",
+    "senha": "1234"
+  },
+  {
+    "id": 10,
+    "nome": "Juan Davi",
+    "email": "juan@gmail.com",
+    "fone": "12345678",
+    "senha": "1234"
+  },
+  {
+    "id": 11,
+    "nome": "Matheus Medeiros",
+    "email": "matheus@gmail.com",
+    "fone": "12345678",
+    "senha": "1234"
+  },
+  {
+    "id": 4,
+    "nome": "admin",
+    "email": "admin",
+    "fone": "fone",
+    "senha": "4321"
+  },
+  {
+    "id": 12,
+    "nome": "Samara Cristina",
+    "email": "samara@gmail.com",
+    "fone": "12345678",
+    "senha": "1234"
+  }
+]

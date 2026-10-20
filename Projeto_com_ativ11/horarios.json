@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "data": "05/10/2026 09:00",
+    "confirmado": false,
+    "id_cliente": null,
+    "id_servico": null,
+    "id_profissional": 1
+  },
+  {
+    "id": 2,
+    "data": "05/10/2026 09:30",
+    "confirmado": false,
+    "id_cliente": null,
+    "id_servico": null,
+    "id_profissional": 1
+  },
+  {
+    "id": 3,
+    "data": "05/10/2026 10:00",
+    "confirmado": false,
+    "id_cliente": null,
+    "id_servico": null,
+    "id_profissional": 1
+  },
+  {
+    "id": 4,
+    "data": "05/10/2026 10:30",
+    "confirmado": false,
+    "id_cliente": null,
+    "id_servico": null,
+    "id_profissional": 1
+  },
+  {
+    "id": 6,
+    "data": "05/10/2026 11:30",
+    "confirmado": false,
+    "id_cliente": null,
+    "id_servico": null,
+    "id_profissional": 1
+  },
+  {
+    "id": 5,
+    "data": "05/10/2026 11:00",
+    "confirmado": true,
+    "id_cliente": 12,
+    "id_servico": 7,
+    "id_profissional": 1
+  },
+  {
+    "id": 7,
+    "data": "05/10/2026 13:00",
+    "confirmado": false,
+    "id_cliente": null,
+    "id_servico": null,
+    "id_profissional": 2
+  },
+  {
+    "id": 11,
+    "data": "05/10/2026 14:00",
+    "confirmado": false,
+    "id_cliente": null,
+    "id_servico": null,
+    "id_profissional": 3
+  },
+  {
+    "id": 12,
+    "data": "05/10/2026 14:30",
+    "confirmado": false,
+    "id_cliente": null,
+    "id_servico": null,
+    "id_profissional": 3
+  },
+  {
+    "id": 14,
+    "data": "05/10/2026 15:30",
+    "confirmado": false,
+    "id_cliente": null,
+    "id_servico": null,
+    "id_profissional": 3
+  },
+  {
+    "id": 8,
+    "data": "05/10/2026 13:30",
+    "confirmado": true,
+    "id_cliente": 9,
+    "id_servico": 2,
+    "id_profissional": 2
+  },
+  {
+    "id": 9,
+    "data": "05/10/2026 14:00",
+    "confirmado": true,
+    "id_cliente": 7,
+    "id_servico": 1,
+    "id_profissional": 2
+  },
+  {
+    "id": 10,
+    "data": "05/10/2026 14:30",
+    "confirmado": true,
+    "id_cliente": 6,
+    "id_servico": 3,
+    "id_profissional": 2
+  },
+  {
+    "id": 13,
+    "data": "05/10/2026 15:00",
+    "confirmado": true,
+    "id_cliente": 12,
+    "id_servico": 3,
+    "id_profissional": 3
+  }
+]

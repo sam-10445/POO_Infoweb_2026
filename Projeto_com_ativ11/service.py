@@ -1,0 +1,321 @@
+from models.cliente import Cliente
+from models.clientedao import ClienteDAO
+from models.servico import Servico
+from models.servicodao import ServicoDAO
+from models.horario import Horario
+from models.horariodao import HorarioDAO
+from models.profissional import Profissional
+from models.profissionaldao import ProfissionalDAO
+from models.atendimento import Atendimento
+from models.atendimentodao import AtendimentoDAO
+from models.atendimentoitem import AtendimentoItem
+from models.atendimentoitemdao import AtendimentoItemDAO
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+class Service:
+    @staticmethod
+    def cliente_inserir(nome, email, fone, senha):
+        obj = Cliente(0, nome, email, fone, senha)
+        ClienteDAO().inserir(obj)
+
+    @staticmethod
+    def cliente_listar():
+        r = ClienteDAO().listar()
+        r.sort(key = lambda obj : obj.get_nome().casefold())
+        return r
+
+    @staticmethod
+    def cliente_listar_id(id):
+        return ClienteDAO().listar_id(id)
+
+    @staticmethod
+    def cliente_atualizar(id, nome, email, fone, senha):
+        obj = Cliente(id, nome, email, fone, senha)
+        ClienteDAO().atualizar(obj)
+
+    @staticmethod
+    def cliente_excluir(id):
+        ClienteDAO().excluir(id)
+
+    @staticmethod
+    def cliente_criar_admin():
+        for c in Service.cliente_listar():
+            if c.get_email() == "admin":
+                return
+        Service.cliente_inserir("admin", "admin", "fone", "1234")
+
+    @staticmethod
+    def cliente_autenticar(email, senha):
+        for c in Service.cliente_listar():
+            if c.get_email() == email and c.get_senha() == senha:
+                return {"id": c.get_id(), "nome": c.get_nome()}
+        return None
+
+
+    @staticmethod
+    def servico_inserir(descricao, valor):
+        obj = Servico(0, descricao, valor)
+        ServicoDAO().inserir(obj)
+
+    @staticmethod
+    def servico_listar():
+        r = ServicoDAO().listar()
+        r.sort(key = lambda obj : obj.get_descricao().casefold())
+        return r
+
+    @staticmethod
+    def servico_listar_id(id):
+        return ServicoDAO().listar_id(id)
+
+    @staticmethod
+    def servico_atualizar(id, descricao, valor):
+        obj = Servico(id, descricao, valor)
+        ServicoDAO().atualizar(obj)
+
+    @staticmethod
+    def servico_excluir(id):
+        ServicoDAO().excluir(id)
+
+
+    @staticmethod
+    def horario_inserir(data, confirmado, id_cliente, id_servico, id_profissional):
+        c = Horario(0, data)
+        c.set_confirmado(confirmado)
+        c.set_id_cliente(id_cliente)
+        c.set_id_servico(id_servico)
+        c.set_id_profissional(id_profissional)
+        HorarioDAO().inserir(c)
+
+    @staticmethod
+    def horario_listar():
+        r = HorarioDAO().listar()
+
+        # Ordena todos os horários pela data.
+        r.sort(key = lambda obj : obj.get_data())
+
+        return r
+
+    @staticmethod
+    def horario_listar_id(id):
+        return HorarioDAO().listar_id(id)
+
+    @staticmethod
+    def horario_atualizar(id, data, confirmado, id_cliente, id_servico, id_profissional):
+        c = Horario(id, data)
+        c.set_confirmado(confirmado)
+        c.set_id_cliente(id_cliente)
+        c.set_id_servico(id_servico)
+        c.set_id_profissional(id_profissional)
+        HorarioDAO().atualizar(c)
+
+    @staticmethod
+    def horario_excluir(id):
+        HorarioDAO().excluir(id)
+
+    @staticmethod
+    def horario_listar_disponiveis(id_profissional):
+        r = []
+
+        # Pega o horário atual considerando o fuso horário do Brasil.
+        # O replace(tzinfo=None) mantém o mesmo formato de data
+        # usado pelos objetos Horario do projeto.
+        agora = datetime.now(
+            ZoneInfo("America/Sao_Paulo")
+        ).replace(tzinfo=None)
+
+        for h in Service.horario_listar():
+            if h.get_data() >= agora and h.get_confirmado() == False \
+            and h.get_id_cliente() == None and h.get_id_profissional() == id_profissional:
+                r.append(h)
+
+        r.sort(key = lambda h : h.get_data())
+
+        return r
+
+    # Lista somente os horários pertencentes ao profissional informado.
+    # Depois da filtragem, os horários são ordenados pela data.
+    @staticmethod
+    def horario_listar_profissional(id_profissional):
+        r = []
+
+        for h in Service.horario_listar():
+            if h.get_id_profissional() == id_profissional:
+                r.append(h)
+
+        r.sort(key = lambda h : h.get_data())
+
+        return r
+
+    # Lista somente os horários pertencentes ao cliente informado.
+    # Depois da filtragem, os horários são ordenados pela data.
+    @staticmethod
+    def horario_listar_cliente(id_cliente):
+        r = []
+
+        for h in Service.horario_listar():
+            if h.get_id_cliente() == id_cliente:
+                r.append(h)
+
+        r.sort(key = lambda h : h.get_data())
+
+        return r
+
+    # Lista os horários que já foram agendados por clientes
+    # para o profissional, mas que ainda não foram confirmados.
+    @staticmethod
+    def horario_listar_agendados(id_profissional):
+        r = []
+
+        for h in Service.horario_listar():
+            if h.get_id_profissional() == id_profissional \
+            and h.get_id_cliente() not in [None, 0] \
+            and h.get_confirmado() == False:
+                r.append(h)
+
+        r.sort(key = lambda h : h.get_data())
+
+        return r
+
+    # Altera somente a senha do cliente.
+    # Nome, e-mail e telefone permanecem iguais.
+    # Isso é importante para o admin, pois seu e-mail não pode mudar.
+    @staticmethod
+    def cliente_alterar_senha(id, senha):
+        obj = Service.cliente_listar_id(id)
+
+        if obj != None:
+            Service.cliente_atualizar(
+                id,
+                obj.get_nome(),
+                obj.get_email(),
+                obj.get_fone(),
+                senha
+            )
+
+
+    @staticmethod
+    def profissional_inserir(nome, email, especialidade, senha):
+        obj = Profissional(0, nome, email, especialidade, senha)
+        ProfissionalDAO().inserir(obj)
+
+    @staticmethod
+    def profissional_listar():
+        r = ProfissionalDAO().listar()
+        r.sort(key = lambda obj : obj.get_nome().casefold())
+        return r
+
+    @staticmethod
+    def profissional_listar_id(id):
+        return ProfissionalDAO().listar_id(id)
+
+    @staticmethod
+    def profissional_atualizar(id, nome, email, especialidade, senha):
+        obj = Profissional(id, nome, email, especialidade, senha)
+        ProfissionalDAO().atualizar(obj)
+
+    @staticmethod
+    def profissional_excluir(id):
+        ProfissionalDAO().excluir(id)
+
+    @staticmethod
+    def profissional_autenticar(email, senha):
+        for c in Service.profissional_listar():
+            if c.get_email() == email and c.get_senha() == senha:
+                return {"id": c.get_id(), "nome": c.get_nome()}
+        return None
+
+    @staticmethod
+    def atendimento_inserir(data, queixa_principal, historico_saude,
+                             avaliacao, prescricao, id_horario, itens):
+        # Cria o atendimento primeiro para obter seu id.
+        obj = Atendimento(
+            0, data, queixa_principal, historico_saude,
+            avaliacao, prescricao, id_horario, 0, False
+        )
+        AtendimentoDAO().inserir(obj)
+
+        total = 0
+        for item in itens:
+            servico = Service.servico_listar_id(item["id_servico"])
+            if servico != None:
+                valor = servico.get_valor()
+                total += item["qtd"] * valor
+                item_obj = AtendimentoItem(
+                    0, obj.get_id(), item["id_servico"],
+                    item["qtd"], valor
+                )
+                AtendimentoItemDAO().inserir(item_obj)
+
+        obj.set_total(total)
+        AtendimentoDAO().atualizar(obj)
+        return obj
+
+    @staticmethod
+    def atendimento_listar():
+        r = AtendimentoDAO().listar()
+        r.sort(key = lambda obj : obj.get_data())
+        return r
+
+    @staticmethod
+    def atendimento_listar_id(id):
+        return AtendimentoDAO().listar_id(id)
+
+    @staticmethod
+    def atendimento_atualizar(id, data, queixa_principal, historico_saude,
+                               avaliacao, prescricao, id_horario, total, pago):
+        obj = Atendimento(
+            id, data, queixa_principal, historico_saude,
+            avaliacao, prescricao, id_horario, total, pago
+        )
+        AtendimentoDAO().atualizar(obj)
+
+    @staticmethod
+    def atendimento_pagar(id):
+        obj = AtendimentoDAO().listar_id(id)
+        if obj != None:
+            obj.set_pago(True)
+            AtendimentoDAO().atualizar(obj)
+
+    @staticmethod
+    def atendimento_listar_profissional(id_profissional):
+        r = []
+        for atendimento in Service.atendimento_listar():
+            horario = Service.horario_listar_id(atendimento.get_id_horario())
+            if horario != None and horario.get_id_profissional() == id_profissional:
+                r.append(atendimento)
+        r.sort(key = lambda obj : obj.get_data())
+        return r
+
+    @staticmethod
+    def atendimento_listar_cliente(id_cliente):
+        r = []
+        for atendimento in Service.atendimento_listar():
+            horario = Service.horario_listar_id(atendimento.get_id_horario())
+            if horario != None and horario.get_id_cliente() == id_cliente:
+                r.append(atendimento)
+        r.sort(key = lambda obj : obj.get_data())
+        return r
+
+    @staticmethod
+    def atendimento_listar_nao_pagos(id_cliente):
+        r = []
+        for atendimento in Service.atendimento_listar_cliente(id_cliente):
+            if atendimento.get_pago() == False:
+                r.append(atendimento)
+        return r
+
+    @staticmethod
+    def atendimento_itens_listar(id_atendimento):
+        r = []
+        for item in AtendimentoItemDAO().listar():
+            if item.get_id_atendimento() == id_atendimento:
+                r.append(item)
+        return r
+
+    @staticmethod
+    def atendimento_ja_registrado(id_horario):
+        for atendimento in Service.atendimento_listar():
+            if atendimento.get_id_horario() == id_horario:
+                return True
+        return False
