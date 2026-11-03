@@ -1,0 +1,35 @@
+LISTA 13 - EXCECOES
+
+Correcoes realizadas preservando a estrutura original do projeto:
+
+1. Cliente e Profissional
+- Mantido o encapsulamento dos atributos e os metodos get/set.
+- Validacao de nome, e-mail, fone/especialidade e senha para impedir campos vazios ou compostos apenas por espacos.
+
+2. Service - e-mails
+- A validacao de e-mail duplicado considera clientes e profissionais.
+- A comparacao ignora diferencas entre maiusculas e minusculas.
+- O e-mail "admin" fica reservado para a conta administrativa.
+- A conta administrativa continua sendo criada pelo metodo cliente_criar_admin.
+- O e-mail da conta administrativa nao pode ser alterado.
+
+3. Service - exclusoes
+- Cliente com horario agendado nao pode ser excluido.
+- Profissional que possui horario cadastrado nao pode ser excluido.
+- Horario associado a cliente nao pode ser excluido.
+
+4. Horario
+- Mantidos os getters e setters e o encapsulamento.
+- A data deve ser um datetime valido e nao pode ser anterior a 2025.
+- A validacao de duplicidade por data/hora e profissional foi mantida para insercao e atualizacao.
+
+5. Interfaces
+- Adicionado tratamento de ValueError com st.error nas operacoes de inserir, atualizar e excluir das telas de clientes, profissionais e horarios.
+- Adicionado tratamento nas telas Abrir Conta, Perfil do Cliente e Perfil do Profissional.
+- Mantido o tratamento existente em Abrir Agenda.
+
+VALIDACOES EXECUTADAS
+- Todos os arquivos Python passaram pela compilacao sintatica.
+- Testes isolados do Service confirmaram: reserva do e-mail admin, e-mail duplicado entre cliente/profissional, bloqueios de exclusao, data anterior a 2025 e horario duplicado.
+
+Observacao: os arquivos JSON de dados foram preservados. Execute o projeto a partir da pasta Projeto_v2, como no projeto original.

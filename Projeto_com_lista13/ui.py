@@ -6,7 +6,7 @@ class UI:
     @staticmethod
     def main():
         op = 0
-        while op != 9:
+        while op != 17:
             op = UI.menu()
             if op == 1: UI.cliente_inserir()
             if op == 2: UI.cliente_listar()

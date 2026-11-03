@@ -12,21 +12,25 @@ from zoneinfo import ZoneInfo
 class Service:
     @staticmethod
     def _validar_email_unico(email, id_cliente=None, id_profissional=None):
+        email = email.strip().casefold()
+
+        if email == "admin":
+            cliente_atual = Service.cliente_listar_id(id_cliente) if id_cliente is not None else None
+            if cliente_atual is None or cliente_atual.get_email().casefold() != "admin":
+                raise ValueError("O e-mail 'admin' é reservado para o administrador")
+
         if id_cliente is not None:
             cliente_atual = Service.cliente_listar_id(id_cliente)
-            if cliente_atual != None:
-                if cliente_atual.get_email() == "admin" and email != "admin":
-                    raise ValueError("O e-mail do administrador não pode ser alterado")
+            if cliente_atual is not None and cliente_atual.get_email().casefold() == "admin" and email != "admin":
+                raise ValueError("O e-mail do administrador não pode ser alterado")
 
         for cliente in Service.cliente_listar():
-            if cliente.get_id() != id_cliente:
-                if cliente.get_email() == email:
-                    raise ValueError("E-mail já cadastrado para outro cliente")
+            if cliente.get_id() != id_cliente and cliente.get_email().casefold() == email:
+                raise ValueError("E-mail já cadastrado para outro cliente")
 
         for profissional in Service.profissional_listar():
-            if profissional.get_id() != id_profissional:
-                if profissional.get_email() == email:
-                    raise ValueError("E-mail já cadastrado para outro profissional")
+            if profissional.get_id() != id_profissional and profissional.get_email().casefold() == email:
+                raise ValueError("E-mail já cadastrado para outro profissional")
 
     @staticmethod
     def cliente_inserir(nome, email, fone, senha):
@@ -59,9 +63,10 @@ class Service:
     @staticmethod
     def cliente_criar_admin():
         for c in Service.cliente_listar():
-            if c.get_email() == "admin":
+            if c.get_email().casefold() == "admin":
                 return
-        Service.cliente_inserir("admin", "admin", "fone", "1234")
+        obj = Cliente(0, "admin", "admin", "fone", "1234")
+        ClienteDAO().inserir(obj)
 
     @staticmethod
     def cliente_autenticar(email, senha):
@@ -145,9 +150,9 @@ class Service:
     @staticmethod
     def horario_excluir(id):
         horario = Service.horario_listar_id(id)
-        if horario != None:
+        if horario is not None:
             if horario.get_id_cliente() not in [None, 0]:
-                raise ValueError("Não é possível excluir um horário ja agendado por um cliente.")
+                raise ValueError("Não é possível excluir um horário já agendado por um cliente")
         HorarioDAO().excluir(id)
 
     @staticmethod
@@ -305,7 +310,8 @@ class Service:
     @staticmethod
     def profissional_excluir(id):
         horarios = Service.horario_listar_profissional(id)
-        if len(horarios) > 0:raise ValueError("Não é possível excluir profissionais com horários cadastrados")
+        if len(horarios) > 0:
+            raise ValueError("Não é possível excluir um profissional que tenha cadastrado horários")
         ProfissionalDAO().excluir(id)
 
     @staticmethod

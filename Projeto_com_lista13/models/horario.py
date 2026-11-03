@@ -19,21 +19,22 @@ class Horario:
     def get_id_servico(self): return self.__id_servico
     def get_id_profissional(self): return self.__id_profissional
 
-    def set_id(self, id): self.__id = id
+    def set_id(self, id):
+        if id < 0: raise ValueError("Id deve ser positivo")
+        self.__id = id
+
     def set_data(self, data):
+        if not isinstance(data, datetime): raise ValueError("A data do horário deve ser válida")
         if data.year < 2025: raise ValueError("O horário não pode ter data anterior a 2025")
         self.__data = data
+
     def set_confirmado(self, confirmado): self.__confirmado = confirmado
     def set_id_cliente(self, id_cliente): self.__id_cliente = id_cliente
     def set_id_servico(self, id_servico): self.__id_servico = id_servico
     def set_id_profissional(self, id_profissional): self.__id_profissional = id_profissional
 
     def to_json(self):
-        dic = {"id":self.__id, "data":self.__data.strftime("%d/%m/%Y %H:%M"), \
-            "confirmado":self.__confirmado, "id_cliente":self.__id_cliente,   \
-            "id_servico":self.__id_servico, "id_profissional":self.__id_profissional
-        }
-        return dic
+        return {"id": self.__id, "data": self.__data.strftime("%d/%m/%Y %H:%M"), "confirmado": self.__confirmado, "id_cliente": self.__id_cliente, "id_servico": self.__id_servico, "id_profissional": self.__id_profissional}
 
     @staticmethod
     def from_json(dic):
@@ -43,4 +44,3 @@ class Horario:
         horario.set_id_servico(dic["id_servico"])
         horario.set_id_profissional(dic["id_profissional"])
         return horario
-        
