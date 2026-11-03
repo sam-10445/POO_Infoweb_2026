@@ -29,7 +29,7 @@ class Horario:
     def to_json(self):
         dic = {"id":self.__id, "data":self.__data.strftime("%d/%m/%Y %H:%M"), \
             "confirmado":self.__confirmado, "id_cliente":self.__id_cliente,   \
-            "id_servico":self.__id_servico, "id_profissional":self.__id_profissional
+            "id_servico":self.__id_servico, "id_profissional":self.__id_profissional 
         }
         return dic
 
@@ -41,4 +41,4 @@ class Horario:
         horario.set_id_servico(dic["id_servico"])
         horario.set_id_profissional(dic["id_profissional"])
         return horario
-        
+    

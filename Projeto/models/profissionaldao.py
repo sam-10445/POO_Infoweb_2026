@@ -3,7 +3,7 @@ import json
 
 class ProfissionalDAO:
     def __init__(self):
-        self.__arquivo = "profissional.json"
+        self.__arquivo = "profissionais.json"
         self.__objetos = []
         self.__abrir()
 
@@ -54,3 +54,4 @@ class ProfissionalDAO:
         arquivo = open(self.__arquivo, mode = "w")
         json.dump(self.__objetos, arquivo, default = Profissional.to_json, indent = 2)
         arquivo.close()
+        

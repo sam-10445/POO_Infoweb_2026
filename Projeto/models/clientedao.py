@@ -54,3 +54,4 @@ class ClienteDAO:
         arquivo = open(self.__arquivo, mode = "w")
         json.dump(self.__objetos, arquivo, default = Cliente.to_json, indent = 2)
         arquivo.close()
+        

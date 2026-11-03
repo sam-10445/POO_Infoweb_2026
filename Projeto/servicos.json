@@ -8,5 +8,10 @@
     "id": 2,
     "descricao": "Exame de Sangue",
     "valor": 200.0
+  },
+  {
+    "id": 3,
+    "descricao": "Curativo",
+    "valor": 10.0
   }
 ]

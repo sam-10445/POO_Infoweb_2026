@@ -54,3 +54,4 @@ class ServicoDAO:
         arquivo = open(self.__arquivo, mode = "w")
         json.dump(self.__objetos, arquivo, default = Servico.to_json, indent = 2)
         arquivo.close()
+        

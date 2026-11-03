@@ -18,9 +18,9 @@ class AgendarServicoUI:
                 if st.button("Agendar"):
                     Service.horario_atualizar(horario.get_id(),
                         horario.get_data(), False,
-                        st.session_state["usuario_id"],
+                        st.session_state["usuario_id"], 
                         servico.get_id(), profissional.get_id())
                     st.success("Horário agendado com sucesso")
                     time.sleep(2)
                     st.rerun()
-                    
+

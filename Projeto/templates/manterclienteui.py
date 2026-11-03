@@ -43,7 +43,7 @@ class ManterClienteUI:
                 Service.cliente_atualizar(id, nome, email, fone, senha)
                 st.success("Cliente atualizado com sucesso")
                 time.sleep(2)
-                st.rerun()                
+                st.rerun()
     def excluir():
         clientes = Service.cliente_listar()
         if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
@@ -54,4 +54,4 @@ class ManterClienteUI:
                 Service.cliente_excluir(id)
                 st.success("Cliente excluído com sucesso")
                 time.sleep(2)
-                st.rerun()                  
+                st.rerun()

@@ -14,4 +14,3 @@ class AbrirContaUI:
             st.success("Conta criada com sucesso")
             time.sleep(2)
             st.rerun()
-            

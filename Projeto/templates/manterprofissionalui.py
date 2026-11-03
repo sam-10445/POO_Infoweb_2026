@@ -60,3 +60,4 @@ class ManterProfissionalUI:
                 st.success("Profissional excluído com sucesso")
                 time.sleep(2)
                 st.rerun()
+                
