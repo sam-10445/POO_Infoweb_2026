@@ -1,0 +1,30 @@
+[
+  {
+    "id": 2,
+    "nome": "Cliente",
+    "email": "cliente@cliente.com",
+    "fone": "12345",
+    "senha": "cliente"
+  },
+  {
+    "id": 3,
+    "nome": "Juan",
+    "email": "admin",
+    "fone": "12345",
+    "senha": "admin"
+  },
+  {
+    "id": 1,
+    "nome": "admin",
+    "email": "admin",
+    "fone": "fone",
+    "senha": "senha3"
+  },
+  {
+    "id": 4,
+    "nome": "Yasmim",
+    "email": "yasmim",
+    "fone": "12345",
+    "senha": "yasmim"
+  }
+]

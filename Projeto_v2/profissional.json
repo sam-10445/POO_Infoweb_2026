@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "nome": "Talia",
+    "email": "talia@talia.com",
+    "especialidade": "Ortodontista",
+    "senha": "talia"
+  },
+  {
+    "id": 2,
+    "nome": "Samara",
+    "email": "samara",
+    "especialidade": "Ortopedista",
+    "senha": "samara"
+  }
+]
