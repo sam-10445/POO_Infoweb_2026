@@ -1,17 +1,22 @@
 [
   {
-    "id": 1,
-    "descricao": "Consulta",
-    "valor": 100.0
-  },
-  {
     "id": 2,
     "descricao": "Exame de Sangue",
     "valor": 200.0
   },
   {
-    "id": 3,
+    "id": 1,
     "descricao": "Consulta",
-    "valor": 2000.0
+    "valor": 150.0
+  },
+  {
+    "id": 3,
+    "descricao": "Retorno",
+    "valor": 80.0
+  },
+  {
+    "id": 4,
+    "descricao": "Dermatol\u00f3gista",
+    "valor": 180.0
   }
 ]
